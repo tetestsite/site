@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>The Experience — Welcome</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="The Experience Church in Glendale, AZ — Sundays 9:30 AM (English) & 12:30 PM (Spanish).">
+  <link rel="icon" href="/assets/favicon.png" />
+  <meta property="og:title" content="The Experience Church" />
+  <meta property="og:description" content="Experience Jesus. Love People. Build Community." />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --brand:#2f80ed; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    header.hero { padding: 5rem 0 2.5rem; background: linear-gradient(180deg, rgba(47,128,237,.10), transparent); }
+    .brand { font-weight: 800; letter-spacing:.2px; }
+    nav ul { align-items:center; }
+    .cta { background: var(--brand); border-color: var(--brand); }
+    .chip { display:inline-block; padding:.25rem .6rem; border-radius:999px; background: rgba(47,128,237,.12); color:#1f5fb8; font-weight:600; font-size:.85rem;}
+    .grid-3 { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+    .card { border: 1px solid var(--pico-muted-border-color); border-radius: .9rem; padding: 1rem; }
+    footer { margin-top: 3rem; padding: 2rem 0; border-top: 1px solid var(--pico-muted-border-color); font-size:.95rem; }
+    .video-wrap { aspect-ratio: 16/9; width: 100%; background:#000; border-radius:1rem; overflow:hidden; }
+    .video-wrap iframe { width:100%; height:100%; border:0; }
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
+    .muted{opacity:.8}
+    .lead{font-size:1.125rem}
+  </style>
+
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+    <nav class="container-fluid" aria-label="Primary">
+      <ul>
+        <li><a href="/" class="brand">The Experience</a></li>
+      </ul>
+      <ul>
+        <li><a href="/visit.html">Visit</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/ministries.html">Ministries</a></li>
+        <li><a href="/media.html">Groups</a></li>
+        <li><a href="/give.html" role="button" class="cta">Give</a></li>
+      </ul>
+    </nav>
+
+      <div class="grid">
+        <div>
+          <p class="chip">You're invited</p>
+          <h1>Experience Jesus. Love People. Build Community.</h1>
+          <p class="lead">Join us this Sunday — there’s a place for you and your family.</p>
+          <div>
+            <a href="/visit.html" class="cta" role="button">Plan Your Visit</a>
+            <a href="/media.html" role="button" class="secondary">Find a Group</a>
+          </div>
+        </div>
+        <div>
+          <img src="/assets/hero.jpg" alt="Welcome to The Experience Church" style="border-radius:1rem; width:100%; height:auto;">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section aria-label="Livestream">
+      <h2 class="sr-only">Latest Livestream</h2>
+      <div class="video-wrap">
+        <!-- Replace channel= with your YouTube channel ID OR use a specific video ID -->
+        <iframe
+          src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&autoplay=0&rel=0"
+          title="The Experience Livestream"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+    </section>
+
+    <section>
+      <h2>This Week</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Sunday Services</h3>
+          <p>Worship, teaching, and prayer.</p>
+          <a href="/visit.html">Times & Location →</a>
+        </article>
+        <article class="card">
+          <h3>Life Groups</h3>
+          <p>Community in homes across the city.</p>
+          <a href="/media.html">Find a Group →</a>
+        </article>
+        <article class="card">
+          <h3>Give</h3>
+          <p>Your generosity fuels the mission.</p>
+          <a href="/give.html">Ways to Give →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+    <footer>
+      <div class="container">
+        <div class="grid">
+          <div>
+            <strong>The Experience Church</strong><br/>
+            <span>5014 W. Marlette Ave, Glendale, AZ</span><br/>
+            <a href="mailto:info@te.church">info@te.church</a> · <a href="tel:+1-623-562-0242">(623) 562-0242</a>
+          </div>
+          <div>
+            <small>Sunday Services</small><br/>
+            <span class="chip">9:30 AM (English)</span> <span class="chip">12:30 PM (Spanish)</span>
+          </div>
+          <div class="muted">
+            <small>&copy; <span id="year"></span> The Experience Church</small>
+          </div>
+        </div>
+      </div>
+      <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    </footer>
+
+</body>
+</html>
