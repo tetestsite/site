@@ -1,127 +1,381 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>The Experience — Welcome</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark">
-  <meta name="description" content="The Experience Church in Glendale, AZ — Sundays 9:30 AM (English) & 12:30 PM (Spanish).">
-  <link rel="icon" href="/assets/favicon.png" />
-  <meta property="og:title" content="The Experience Church" />
-  <meta property="og:description" content="Experience Jesus. Love People. Build Community." />
-  <meta property="og:image" content="/assets/og-image.jpg" />
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <title>TE Church — We Are The Experience</title>
+  <meta name="description" content="We are The Experience Church in Glendale, AZ — Join us this Sunday.">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --brand:#2f80ed; }
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    header.hero { padding: 5rem 0 2.5rem; background: linear-gradient(180deg, rgba(47,128,237,.10), transparent); }
-    .brand { font-weight: 800; letter-spacing:.2px; }
-    nav ul { align-items:center; }
-    .cta { background: var(--brand); border-color: var(--brand); }
-    .chip { display:inline-block; padding:.25rem .6rem; border-radius:999px; background: rgba(47,128,237,.12); color:#1f5fb8; font-weight:600; font-size:.85rem;}
-    .grid-3 { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
-    .card { border: 1px solid var(--pico-muted-border-color); border-radius: .9rem; padding: 1rem; }
-    footer { margin-top: 3rem; padding: 2rem 0; border-top: 1px solid var(--pico-muted-border-color); font-size:.95rem; }
-    .video-wrap { aspect-ratio: 16/9; width: 100%; background:#000; border-radius:1rem; overflow:hidden; }
-    .video-wrap iframe { width:100%; height:100%; border:0; }
-    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;}
-    .muted{opacity:.8}
-    .lead{font-size:1.125rem}
-  </style>
 
+  <style>
+    :root{
+      --bg:#0f0f10;        /* page background */
+      --text:#f4f5f7;      /* base text */
+      --muted:#a9adb7;     /* muted text */
+      --brand:#111827;     /* dark header bg */
+      --accent:#111827;    /* pills outline */
+      --pill:#fff;         /* pill text */
+      --cta:#111827;       /* solid button bg */
+      --cta-text:#fff;
+      --link:#0ea5e9;      /* links */
+      --card:#151618;      /* cards */
+      --card-border:#232428;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#fff;color:#0b0c0f;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1200px,92vw);margin-inline:auto}
+
+    /* ---------- NAV ---------- */
+    .nav{position:fixed; inset:0 0 auto 0; height:72px; display:flex; align-items:center; z-index:50; transition:transform .35s ease, background .35s ease, box-shadow .35s ease; backdrop-filter:saturate(180%) blur(8px);}
+    .nav--top{background:rgba(255,255,255,.24);} /* at top over hero */
+    .nav--scrolled{background:#ffffffcc; box-shadow:0 4px 24px rgba(0,0,0,.08);} /* after scroll */
+    .nav--hidden{transform:translateY(-100%);} /* hide on scroll down */
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;width:min(1200px,92vw);margin-inline:auto}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .brand__logo{width:28px;height:28px;border-radius:6px;background:#111827}
+    .nav__links{display:flex;gap:26px;align-items:center}
+    .pill{border:1.5px solid #111827; color:#111827; padding:.6rem 1.1rem; border-radius:999px; font-weight:700; font-size:.92rem;}
+    .pill--solid{background:#111827; color:#fff; border-color:#111827}
+    .nav a{color:#0b0c0f;font-weight:600}
+
+    /* mobile */
+    .menu-btn{display:none}
+    @media (max-width: 900px){
+      .nav__links{display:none}
+      .menu-btn{display:inline-flex; align-items:center; gap:8px; padding:.55rem .9rem; border-radius:999px; border:1.5px solid #111827; background:#fff; font-weight:700}
+      .mobile{position:fixed; inset:72px 0 auto 0; background:#fff; border-bottom:1px solid #eee; display:none}
+      .mobile.open{display:block}
+      .mobile ul{list-style:none;padding:16px 24px;margin:0;display:grid;gap:8px}
+      .mobile a{padding:10px 8px; display:block; font-weight:600}
+    }
+
+    /* ---------- HERO ---------- */
+    .hero{position:relative; min-height:86vh; display:grid; align-items:end;}
+    .hero__media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.05) saturate(1.02);}  
+    .hero__overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.35));}
+    .hero__content{position:relative; padding:20vh 0 10vh; color:#fff}
+    .eyebrow{letter-spacing:.18em; text-transform:uppercase; font-weight:700; font-size:.78rem; opacity:.9}
+    h1{font-size:clamp(2.4rem, 5vw, 5rem); line-height:1.02; margin:.4rem 0 1rem; font-weight:800}
+    .hero p{font-size:1.05rem; opacity:.9; max-width:52ch}
+    .hero__actions{display:flex; gap:14px; margin-top:18px; flex-wrap:wrap}
+
+    /* ---------- SECTIONS ---------- */
+    section{padding:72px 0}
+    h2{font-size:clamp(1.6rem,3vw,2.4rem); margin:0 0 .6rem}
+    .lead{font-size:1.125rem; opacity:.85}
+
+    /* photo strip */
+    .strip{display:grid; grid-template-columns: repeat(12,1fr); gap:12px; margin-top:32px}
+    .strip img{border-radius:14px; height:300px; object-fit:cover}
+    @media (max-width:900px){.strip{grid-template-columns:repeat(6,1fr)} .strip img{height:220px}}
+
+    /* tabs */
+    .tabs{display:flex; gap:18px; align-items:center; border-bottom:1px solid #e8e8e8; margin:8px 0 18px}
+    .tab{appearance:none; background:none; border:none; padding:10px 2px; font-weight:700; opacity:.55; cursor:pointer;}
+    .tab[aria-selected="true"]{opacity:1; color:#111827; border-bottom:2px solid #0ea5e9}
+    .tabpanels{display:grid; gap:14px}
+    .row{display:flex; justify-content:space-between; align-items:center; padding:18px 4px; border-bottom:1px solid #efefef}
+
+    /* split feature */
+    .split{display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center}
+    .split img{border-radius:18px}
+    @media (max-width:900px){.split{grid-template-columns:1fr;}}
+
+    /* dark cta */
+    .dark{background:#111827; color:#fff; border-radius:22px; padding:42px}
+    .dark .pill{border-color:#fff; color:#fff}
+    .dark .pill--solid{background:#fff; color:#111827}
+
+    /* media cards */
+    .media-grid{display:grid; gap:20px; grid-template-columns: repeat(12,1fr)}
+    .card{background:#fff; border:1px solid #eee; border-radius:14px; overflow:hidden}
+    .card__thumb{aspect-ratio: 16/9; background:#ddd}
+    .card__body{padding:14px}
+    .xs{font-size:.86rem; opacity:.7}
+    .col-4{grid-column: span 4}
+    @media (max-width:900px){.col-4{grid-column: span 12}}
+
+    /* footer */
+    footer{background:#111827; color:#cbd5e1; padding:48px 0 28px; margin-top:64px}
+    .fgrid{display:grid; grid-template-columns: repeat(12,1fr); gap:22px}
+    .fcol{grid-column: span 3}
+    @media (max-width:900px){.fcol{grid-column: span 12}}
+    .fbrand{display:flex; align-items:center; gap:10px; font-weight:800; color:#fff}
+
+    /* ---------- Effects ---------- */
+    html{scroll-behavior:smooth}
+    [data-reveal]{opacity:0; transform: translateY(22px); transition: all .6s ease}
+    [data-reveal].is-visible{opacity:1; transform:none}
+  </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="container">
-    <nav class="container-fluid" aria-label="Primary">
+  <!-- NAV -->
+  <header class="nav nav--top" id="siteNav">
+    <div class="nav__inner">
+      <a href="#top" class="brand"><span class="brand__logo"></span> THE EXPERIENCE</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#media">Media</a>
+        <a href="#ministries">Ministries</a>
+        <a href="#involved">Get Involved</a>
+        <a href="#give">Give</a>
+        <a href="/visit.html" class="pill">Visit</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-controls="mobileMenu" aria-expanded="false">Menu ▾</button>
+    </div>
+    <div class="mobile" id="mobileMenu">
       <ul>
-        <li><a href="/" class="brand">The Experience</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#ministries">Ministries</a></li>
+        <li><a href="#involved">Get Involved</a></li>
+        <li><a href="#give">Give</a></li>
+        <li><a class="pill" href="/visit.html">Visit</a></li>
       </ul>
-      <ul>
-        <li><a href="/visit.html">Visit</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/ministries.html">Ministries</a></li>
-        <li><a href="/media.html">Groups</a></li>
-        <li><a href="/give.html" role="button" class="cta">Give</a></li>
-      </ul>
-    </nav>
-
-      <div class="grid">
-        <div>
-          <p class="chip">You're invited</p>
-          <h1>Experience Jesus. Love People. Build Community.</h1>
-          <p class="lead">Join us this Sunday — there’s a place for you and your family.</p>
-          <div>
-            <a href="/visit.html" class="cta" role="button">Plan Your Visit</a>
-            <a href="/media.html" role="button" class="secondary">Find a Group</a>
-          </div>
-        </div>
-        <div>
-          <img src="/assets/hero.jpg" alt="Welcome to The Experience Church" style="border-radius:1rem; width:100%; height:auto;">
-        </div>
-      </div>
     </div>
   </header>
 
-  <main class="container">
-    <section aria-label="Livestream">
-      <h2 class="sr-only">Latest Livestream</h2>
-      <div class="video-wrap">
-        <!-- Replace channel= with your YouTube channel ID OR use a specific video ID -->
-        <iframe
-          src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&autoplay=0&rel=0"
-          title="The Experience Livestream"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__media" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2400&auto=format&fit=crop" alt=""/>
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="container hero__content">
+      <p class="eyebrow" data-reveal>WELCOME TO THE EXPERIENCE</p>
+      <h1 data-reveal>We Are<br/> The Experience</h1>
+      <p data-reveal>You're invited to join us this Sunday in Glendale. Come as you are — there’s a place for you.</p>
+      <div class="hero__actions" data-reveal>
+        <a class="pill pill--solid" href="/visit.html">Visit</a>
+        <a class="pill" href="#involved">Get Involved</a>
       </div>
-    </section>
-
-    <section>
-      <h2>This Week</h2>
-      <div class="grid-3">
-        <article class="card">
-          <h3>Sunday Services</h3>
-          <p>Worship, teaching, and prayer.</p>
-          <a href="/visit.html">Times & Location →</a>
-        </article>
-        <article class="card">
-          <h3>Life Groups</h3>
-          <p>Community in homes across the city.</p>
-          <a href="/media.html">Find a Group →</a>
-        </article>
-        <article class="card">
-          <h3>Give</h3>
-          <p>Your generosity fuels the mission.</p>
-          <a href="/give.html">Ways to Give →</a>
-        </article>
-      </div>
-    </section>
-  </main>
-
-    <footer>
-      <div class="container">
-        <div class="grid">
-          <div>
-            <strong>The Experience Church</strong><br/>
-            <span>5014 W. Marlette Ave, Glendale, AZ</span><br/>
-            <a href="mailto:info@te.church">info@te.church</a> · <a href="tel:+1-623-562-0242">(623) 562-0242</a>
-          </div>
-          <div>
-            <small>Sunday Services</small><br/>
-            <span class="chip">9:30 AM (English)</span> <span class="chip">12:30 PM (Spanish)</span>
-          </div>
-          <div class="muted">
-            <small>&copy; <span id="year"></span> The Experience Church</small>
+      <div style="margin-top:26px; max-width:460px" data-reveal>
+        <div class="card" style="background:rgba(17,24,39,.7); color:#fff; border-color:rgba(255,255,255,.18)">
+          <div class="card__body">
+            <span class="xs" style="letter-spacing:.15em; text-transform:uppercase; opacity:.9">Watch the Latest Sermon</span>
+            <div class="card__thumb" style="margin-top:8px; border-radius:10px; overflow:hidden">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&rel=0" title="Latest" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
       </div>
-      <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-    </footer>
+    </div>
+  </section>
 
+  <!-- WELCOME / ABOUT STRIP -->
+  <section id="about">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Welcome to The Experience</p>
+      <h2 data-reveal>One church gathering to love God, the church, our city, and the nations.</h2>
+      <div class="hero__actions" data-reveal>
+        <a class="pill pill--solid" href="/visit.html">Visit</a>
+        <a class="pill" href="/about.html">About Us</a>
+      </div>
+      <div class="strip">
+        <img data-reveal src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop" alt="Baptism"/>
+        <img data-reveal src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200&auto=format&fit=crop" alt="Community"/>
+        <img data-reveal src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1200&auto=format&fit=crop" alt="Worship"/>
+        <img data-reveal src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1200&auto=format&fit=crop" alt="Serve"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S HAPPENING (Tabs) -->
+  <section id="involved" style="background:#fafafa">
+    <div class="container">
+      <h2 data-reveal>What's Happening</h2>
+      <p class="lead" data-reveal>Let’s walk with Jesus together! Check out upcoming classes, events, and more.</p>
+      <div class="tabs" role="tablist" aria-label="What's Happening">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="panel-classes" id="tab-classes">Classes</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-events" id="tab-events">Events</button>
+      </div>
+      <div class="tabpanels">
+        <div id="panel-classes" role="tabpanel" aria-labelledby="tab-classes">
+          <div class="row"><span><strong>Aug 20</strong> · Fall Classes</span> <a class="pill" href="#">Details →</a></div>
+          <div class="row"><span><strong>Sep 7</strong> · Mission of God</span> <a class="pill" href="#">Details →</a></div>
+        </div>
+        <div id="panel-events" role="tabpanel" aria-labelledby="tab-events" hidden>
+          <div class="row"><span><strong>Aug 24</strong> · Worship Night</span> <a class="pill" href="#">Details →</a></div>
+          <div class="row"><span><strong>Sep 14</strong> · Serve Day</span> <a class="pill" href="#">Details →</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENT SERIES (split) -->
+  <section id="media">
+    <div class="container split">
+      <img data-reveal src="https://images.unsplash.com/photo-1578926375605-eaf7559b145d?q=80&w=1600&auto=format&fit=crop" alt="Series art">
+      <div>
+        <p class="eyebrow" data-reveal>Current Sermon Series</p>
+        <h2 data-reveal>Press On!</h2>
+        <p class="lead" data-reveal>You don’t have to chase what’s freely been given. The good life is here in Jesus.</p>
+        <div class="hero__actions" data-reveal>
+          <a class="pill pill--solid" href="#">Explore Series</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DARK CTA -->
+  <section>
+    <div class="container dark">
+      <div class="split">
+        <div>
+          <h2 data-reveal>You are welcome here.</h2>
+          <p class="lead" data-reveal>New to faith? Been following Jesus a while? Somewhere in between? Come learn about Jesus alongside us.</p>
+          <div class="hero__actions" data-reveal>
+            <a class="pill pill--solid" href="/visit.html">Visit</a>
+            <a class="pill" href="#involved">Get Involved</a>
+          </div>
+        </div>
+        <img data-reveal src="https://images.unsplash.com/photo-1513639725746-c5d3e861f32a?q=80&w=1600&auto=format&fit=crop" alt="Welcome">
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST FROM MEDIA (cards) -->
+  <section>
+    <div class="container">
+      <p class="eyebrow" data-reveal>Latest from Media</p>
+      <h2 data-reveal>Content to encourage your walk with Jesus.</h2>
+      <div class="tabs" role="tablist" aria-label="Media filters">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="panel-sermons" id="tab-sermons">Sermons</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-videos" id="tab-videos">Videos</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-articles" id="tab-articles">Articles</button>
+      </div>
+      <div class="tabpanels media-grid">
+        <div id="panel-sermons" role="tabpanel" aria-labelledby="tab-sermons" class="col-12">
+          <div class="media-grid">
+            <article class="card col-4" data-reveal>
+              <div class="card__thumb"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1200&auto=format&fit=crop" alt="Sermon 1"></div>
+              <div class="card__body"><div class="xs">8.10.25 · Press On!</div><h3>From Empire To Ecclesia</h3><a class="pill" href="#">Watch →</a></div>
+            </article>
+            <article class="card col-4" data-reveal>
+              <div class="card__thumb"><img src="https://images.unsplash.com/photo-1526401485004-2fda9f4e57bb?q=80&w=1200&auto=format&fit=crop" alt="Sermon 2"></div>
+              <div class="card__body"><div class="xs">8.3.25 · Summer Series</div><h3>Week 5</h3><a class="pill" href="#">Watch →</a></div>
+            </article>
+            <article class="card col-4" data-reveal>
+              <div class="card__thumb"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop" alt="Sermon 3"></div>
+              <div class="card__body"><div class="xs">7.27.25 · Summer Series</div><h3>Week 4</h3><a class="pill" href="#">Watch →</a></div>
+            </article>
+          </div>
+        </div>
+        <div id="panel-videos" role="tabpanel" aria-labelledby="tab-videos" hidden>
+          <p class="muted">Video content coming soon.</p>
+        </div>
+        <div id="panel-articles" role="tabpanel" aria-labelledby="tab-articles" hidden>
+          <p class="muted">Articles coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="give">
+    <div class="container fgrid">
+      <div class="fcol">
+        <a class="fbrand" href="#top"><span class="brand__logo"></span> THE EXPERIENCE</a>
+        <p class="xs" style="margin-top:8px">© <span id="year"></span> The Experience Church</p>
+      </div>
+      <div class="fcol">
+        <strong>About</strong>
+        <div><a href="/about.html">About Us</a></div>
+        <div><a href="/about.html#lead">Our Team</a></div>
+        <div><a href="/give.html">Give</a></div>
+      </div>
+      <div class="fcol">
+        <strong>Get Involved</strong>
+        <div><a href="#involved">Classes</a></div>
+        <div><a href="/media.html">Groups</a></div>
+        <div><a href="/ministries.html">Ministries</a></div>
+      </div>
+      <div class="fcol">
+        <strong>Visit</strong>
+        <div>5014 W. Marlette Ave<br/>Glendale, AZ</div>
+        <div><a href="https://maps.google.com/?q=5014+W+Marlette+Ave+Glendale+AZ">Get Directions →</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hide-on-scroll nav + background change
+    const nav = document.getElementById('siteNav');
+    let lastY = window.scrollY;
+    const topThreshold = 40;
+    function onScroll(){
+      const y = window.scrollY;
+      // background state
+      if(y > topThreshold){
+        nav.classList.remove('nav--top');
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.add('nav--top');
+        nav.classList.remove('nav--scrolled');
+      }
+      // hide/show logic
+      if (y > lastY && y > 140){
+        nav.classList.add('nav--hidden');
+      } else {
+        nav.classList.remove('nav--hidden');
+      }
+      lastY = y;
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive:true});
+
+    // Mobile menu toggle
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if(btn){
+      btn.addEventListener('click', ()=>{
+        const open = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}))
+    }
+
+    // IntersectionObserver reveal animations
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      })
+    }, {threshold: .12});
+    document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+
+    // Tabs (accessible)
+    function setupTabs(scope){
+      const tabs = scope.querySelectorAll('[role="tab"]');
+      const panels = scope.parentElement.querySelectorAll('[role="tabpanel"]');
+      tabs.forEach(tab=>{
+        tab.addEventListener('click', ()=> activate(tab));
+        tab.addEventListener('keydown', (e)=>{
+          const i = Array.from(tabs).indexOf(tab);
+          if(e.key==='ArrowRight'){ (tabs[i+1]||tabs[0]).focus(); }
+          if(e.key==='ArrowLeft'){ (tabs[i-1]||tabs[tabs.length-1]).focus(); }
+        });
+      });
+      function activate(tab){
+        tabs.forEach(t=>{t.setAttribute('aria-selected', t===tab ? 'true':'false');});
+        panels.forEach(p=>{
+          const match = p.getAttribute('aria-labelledby') === tab.id;
+          p.hidden = !match;
+        });
+      }
+    }
+    document.querySelectorAll('.tabs').forEach(t=>setupTabs(t));
+  </script>
 </body>
 </html>
