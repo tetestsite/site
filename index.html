@@ -1,0 +1,107 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Experience — Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; color:#0b0c0f;}
+    .container{width:min(1100px,92vw); margin-inline:auto;}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:16px; height:72px;}
+    .links{display:flex; gap:18px; align-items:center; font-weight:600;}
+    .pill{border:1.5px solid #111827; color:#111827; padding:.55rem 1rem; border-radius:999px; font-weight:700;}
+    .pill--solid{background:#111827; color:#fff; border-color:#111827;}
+    .section{padding:72px 0;}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(3,1fr);}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr;} .links{display:none;} }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div class="row">
+        <a href="#" class="nav-logo" aria-label="The Experience">
+          <img src="assets/logo-light.png" class="logo-light" alt="The Experience logo (light)">
+          <img src="assets/churchlogo.png" class="logo-color" alt="The Experience logo">
+        </a>
+        <nav class="links">
+          <a href="#about">About</a>
+          <a href="#groups">Groups</a>
+          <a href="#media">Media</a>
+          <a href="#visit">Visit</a>
+          <a href="#give" class="pill">Give</a>
+          <a href="#visit" class="pill pill--solid">Plan a Visit</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <img class="hero__bg" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=2400&auto=format&fit=crop" alt="">
+      <div class="hero__overlay"></div>
+      <div class="container" style="position:relative; z-index:2; padding:24vh 0 14vh; color:#fff;">
+        <h1 class="reveal" style="font-size: clamp(2.6rem, 6vw, 4.8rem); line-height:1.02; margin:0 0 .6rem; font-weight:800">We Are The Experience</h1>
+        <p class="reveal" style="max-width:60ch; opacity:.9">Join us this Sunday — there’s a place for you and your family.</p>
+        <div class="reveal" style="display:flex; gap:12px; margin-top:14px; flex-wrap:wrap">
+          <a href="#visit" class="pill pill--solid">Visit</a>
+          <a href="#groups" class="pill">Get Involved</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE STRIP -->
+    <section class="section">
+      <div class="container">
+        <div class="grid">
+          <article class="card reveal">
+            <h3 style="margin:.4rem 0 0">Watch the latest livestream</h3>
+            <div class="aspect-video" style="border-radius:12px; overflow:hidden; background:#000; margin-top:8px">
+              <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&rel=0" title="Livestream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>
+          </article>
+          <article class="card reveal">
+            <h3 style="margin:.4rem 0 0">Plan a Visit</h3>
+            <p style="opacity:.8">Let us know you’re coming — we’ll greet you and help with kids check‑in.</p>
+            <a href="#visit" class="pill pill--solid" style="margin-top:8px; display:inline-block">Start</a>
+          </article>
+          <article class="card reveal">
+            <h3 style="margin:.4rem 0 0">Join a Small Group</h3>
+            <p style="opacity:.8">Life is better in community. Find a group near you.</p>
+            <a href="#groups" class="pill" style="margin-top:8px; display:inline-block">Explore</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="give" class="section" style="background:#111827; color:#cbd5e1; margin-top:48px">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:18px">
+        <div>
+          <strong style="color:#fff">The Experience</strong><br/>
+          5014 W. Marlette Ave, Glendale, AZ<br/>
+          (623) 562-0242
+        </div>
+        <div>
+          <strong style="color:#fff">Gatherings</strong><br/>
+          Sundays 9:30 AM (English), 12:30 PM (Spanish)
+        </div>
+        <div>
+          <strong style="color:#fff">Give</strong><br/>
+          Text any amount to <strong>84321</strong> or give online.
+        </div>
+      </div>
+      <div style="border-top:1px solid #233041; margin-top:18px; padding-top:14px; font-size:.9rem; opacity:.8">
+        © <span id="year"></span> The Experience Church
+      </div>
+    </div>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
