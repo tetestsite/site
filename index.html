@@ -4,108 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Experience — Home</title>
-
-  <!-- Minimal, component-scoped CSS -->
-  <style>
-    :root{
-      --ink:#111827;          /* black */
-      --glass: rgba(255,255,255,.55);
-      --glass-solid: rgba(255,255,255,.88);
-      --border: rgba(17,24,39,.08);
-    }
-    html { scroll-behavior: smooth; }
-    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); }
-    .container { width:min(1100px,92vw); margin-inline:auto; }
-
-    /* NAVBAR (frosted + tidy) */
-    .navbar{
-      position:fixed; inset:0 0 auto 0; height:72px; z-index:1000;
-      background: var(--glass);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border-bottom:1px solid var(--border);
-      transition: background-color .25s ease, transform .25s ease;
-    }
-    .navbar--solid{ background: var(--glass-solid); }
-    .navbar--hidden{ transform: translateY(-100%); }
-
-    .nav-row{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-      height:72px; width:min(1100px,92vw); margin-inline:auto;
-    }
-
-    /* Left: LOGO (PNG) — always visible */
-    .nav-left{ display:flex; align-items:center; gap:10px; min-width:140px; }
-    .nav-logo{ height:36px; width:auto; display:block; }
-
-    /* Center: TITLE (SVG) — forced black via CSS color */
-    .nav-title{ display:flex; align-items:center; justify-content:center; flex:1; text-align:center; }
-    .nav-title .title-svg{ display:inline-flex; color: var(--ink); line-height:0; }
-    .nav-title img,
-    .nav-title svg{ height:28px; width:auto; display:block; }
-
-    /* Right: links */
-    .nav-links{ display:flex; align-items:center; gap:18px; font-weight:600; color:var(--ink); }
-    .nav-links a{ color:var(--ink); text-decoration:none; }
-    .pill{ border:1.5px solid var(--ink); color:var(--ink); padding:.55rem 1rem; border-radius:999px; font-weight:700; }
-    .pill--solid{ background:var(--ink); color:#fff; }
-
-    /* Mobile */
-    .menu-btn{ display:none; border:1px solid var(--ink); background:#fff; color:var(--ink); padding:.45rem .8rem; border-radius:999px; font-weight:700; }
-    .mobile{ background:#ffffffee; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); display:grid; gap:8px; padding:12px 4vw; }
-    .mobile a{ padding:8px 6px; color:var(--ink); font-weight:600; text-decoration:none; }
-    @media (max-width: 900px){
-      .nav-links{ display:none; }
-      .menu-btn{ display:inline-flex; }
-      .nav-left{ min-width:auto; }
-      .nav-title{ justify-content:flex-start; }
-    }
-
-    /* HERO + helpers */
-    #hero{ position:relative; min-height:86vh; }
-    .hero__bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-    .hero__shade{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.48)); }
-    .hero__inner{ position:relative; z-index:2; padding:24vh 0 14vh; color:#fff; }
-    .lead{ opacity:.9; max-width:60ch; }
-    .cta-row{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
-
-    /* Cards/sections */
-    .section{ padding:72px 0; }
-    .grid{ display:grid; gap:16px; grid-template-columns:repeat(3,1fr); }
-    .card{ background:#fff; border:1px solid #eee; border-radius:14px; padding:16px; }
-    @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
-
-    .aspect-video{ position:relative; padding-top:56.25%; border-radius:12px; overflow:hidden; background:#000; }
-    .aspect-video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-    /* Subtle reveal (optional) */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal--visible { opacity: 1; transform: none; }
-
-    /* Footer */
-    footer{ background:#111827; color:#cbd5e1; padding:48px 0 28px; margin-top:48px; }
-    .fgrid{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
-    @media (max-width:900px){ .fgrid{ grid-template-columns:1fr; } }
-    .fbrand{ color:#fff; font-weight:800; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- FROSTED NAVBAR -->
   <header class="navbar" id="siteNav">
     <div class="nav-row">
-      <!-- Left: your PNG logo -->
+      <!-- Left: SVG logo (no white box) -->
       <a href="index.html" class="nav-left" aria-label="The Experience">
-        <img src="assets/churchlogo.png" alt="The Experience logo" class="nav-logo">
+        <img src="./assets/churchlogo.svg" alt="The Experience logo" class="nav-logo" width="160" height="40">
       </a>
 
-      <!-- Center: Title as SVG (black) -->
+      <!-- Center: wordmark title (BLACK) -->
       <a href="index.html" class="nav-title" aria-label="The Experience">
         <span class="title-svg">
-          <!-- Using your uploaded SVG as an <img> keeps it simple.
-               If you need to control color via CSS currentColor,
-               you can inline the SVG markup and set its paths to fill='currentColor'. -->
-          <img src="assets/the_experience_organetto_from_ttf.svg" alt="The Experience wordmark">
+          <img src="./assets/the_experience_organetto_from_ttf.svg" alt="THE EXPERIENCE wordmark" width="240" height="32">
         </span>
       </a>
 
@@ -118,11 +32,11 @@
         <a href="visit.html#plan" class="pill pill--solid">Plan a Visit</a>
       </nav>
 
-      <!-- Mobile -->
+      <!-- Mobile button -->
       <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false">Menu</button>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile menu (hidden by default) -->
     <div class="mobile" id="mobileMenu" hidden>
       <a href="about.html">About</a>
       <a href="media.html">Groups</a>
@@ -137,19 +51,23 @@
     <img class="hero__bg" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=2400&auto=format&fit=crop" alt="">
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="container hero__inner">
-      <h1 class="reveal" style="font-size:clamp(2.6rem,6vw,4.8rem);line-height:1.02;margin:0 0 .6rem;font-weight:800">We Are The Experience</h1>
+      <h1 class="reveal hero__title">We Are The Experience</h1>
       <p class="lead reveal">Join us this Sunday — there’s a place for you and your family.</p>
       <div class="cta-row reveal">
-        <a href="visit.html" class="pill pill--solid" style="background:#fff;color:#111827;border-color:#fff">Visit</a>
-        <a href="media.html" class="pill" style="color:#fff;border-color:#fff">Get Involved</a>
+        <a href="visit.html" class="pill pill--solid hero__btn--light">Visit</a>
+        <a href="media.html" class="pill hero__btn--ghost">Get Involved</a>
       </div>
-      <div class="card reveal" style="background:rgba(17,24,39,.78); color:#fff; border-color:rgba(255,255,255,.18); margin-top:22px; max-width:520px;">
-        <div style="letter-spacing:.12em; text-transform:uppercase; font-size:.8rem; opacity:.9">Watch the Latest</div>
-        <div class="aspect-video" style="margin-top:8px;">
-          <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&rel=0"
-                  title="Livestream"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen loading="lazy"></iframe>
+
+      <div class="card reveal hero__video">
+        <div class="eyebrow">Watch the Latest</div>
+        <div class="aspect-video">
+          <!-- Replace with your Channel ID (starts with UC...) or a specific VIDEO_ID -->
+          <iframe
+            src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&rel=0"
+            title="Livestream"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -160,19 +78,19 @@
     <div class="container">
       <div class="grid">
         <article class="card reveal">
-          <h3 style="margin:.4rem 0 0">Plan a Visit</h3>
-          <p style="opacity:.8">Let us know you’re coming — we’ll greet you and help with kids check‑in.</p>
-          <a href="visit.html#plan" class="pill pill--solid" style="margin-top:8px; display:inline-block">Start</a>
+          <h3>Plan a Visit</h3>
+          <p class="muted">Let us know you’re coming — we’ll greet you and help with kids check‑in.</p>
+          <a href="visit.html#plan" class="pill pill--solid">Start</a>
         </article>
         <article class="card reveal">
-          <h3 style="margin:.4rem 0 0">Join a Small Group</h3>
-          <p style="opacity:.8">Life is better in community. Find a group near you.</p>
-          <a href="media.html" class="pill" style="margin-top:8px; display:inline-block">Explore</a>
+          <h3>Join a Small Group</h3>
+          <p class="muted">Life is better in community. Find a group near you.</p>
+          <a href="media.html" class="pill">Explore</a>
         </article>
         <article class="card reveal">
-          <h3 style="margin:.4rem 0 0">Give</h3>
-          <p style="opacity:.8">Text any amount to <strong>84321</strong> or give online.</p>
-          <a href="#give" class="pill" style="margin-top:8px; display:inline-block">Ways to Give</a>
+          <h3>Give</h3>
+          <p class="muted">Text any amount to <strong>84321</strong> or give online.</p>
+          <a href="#give" class="pill">Ways to Give</a>
         </article>
       </div>
     </div>
@@ -188,65 +106,18 @@
           <div class="muted">(623) 562-0242</div>
         </div>
         <div>
-          <strong style="color:#fff">Gatherings</strong><br/>
+          <strong class="fhead">Gatherings</strong><br/>
           Sundays 9:30 AM (English), 12:30 PM (Spanish)
         </div>
         <div>
-          <strong style="color:#fff">Give</strong><br/>
+          <strong class="fhead">Give</strong><br/>
           Text any amount to <strong>84321</strong> or give online.
         </div>
       </div>
-      <div style="border-top:1px solid #233041; margin-top:18px; padding-top:14px; font-size:.9rem; opacity:.8">
-        © <span id="year"></span> The Experience Church
-      </div>
+      <div class="fcopy">© <span id="year"></span> The Experience Church</div>
     </div>
   </footer>
 
-  <!-- Tiny JS: solid-after-hero, hide-on-scroll, mobile menu, reveal -->
-  <script>
-    (function(){
-      const nav = document.getElementById('siteNav');
-      let lastY = window.scrollY;
-      const hero = document.getElementById('hero');
-      const heroH = hero ? hero.offsetHeight : 240;
-
-      function onScroll(){
-        const y = window.scrollY;
-        // solid background after hero
-        if (y > heroH - 60) nav.classList.add('navbar--solid');
-        else nav.classList.remove('navbar--solid');
-
-        // hide on scroll down, show on scroll up
-        if (y > lastY && y > 140) nav.classList.add('navbar--hidden');
-        else nav.classList.remove('navbar--hidden');
-        lastY = y;
-      }
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive:true });
-
-      // mobile menu toggle
-      const btn = document.getElementById('menuBtn');
-      const menu = document.getElementById('mobileMenu');
-      if (btn && menu) {
-        btn.addEventListener('click', ()=>{
-          const open = menu.hasAttribute('hidden');
-          if (open) menu.removeAttribute('hidden'); else menu.setAttribute('hidden','');
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-      }
-
-      // reveal on scroll
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ e.target.classList.add('reveal--visible'); io.unobserve(e.target); }
-        });
-      }, {threshold:.15});
-      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-      // year
-      const yel = document.getElementById('year');
-      if (yel) yel.textContent = new Date().getFullYear();
-    })();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
