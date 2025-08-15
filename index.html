@@ -4,82 +4,188 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Experience — Home</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Minimal, component-scoped CSS -->
+  <style>
+    :root{
+      --ink:#111827;          /* black */
+      --glass: rgba(255,255,255,.55);
+      --glass-solid: rgba(255,255,255,.88);
+      --border: rgba(17,24,39,.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); }
+    .container { width:min(1100px,92vw); margin-inline:auto; }
+
+    /* NAVBAR (frosted + tidy) */
+    .navbar{
+      position:fixed; inset:0 0 auto 0; height:72px; z-index:1000;
+      background: var(--glass);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+      transition: background-color .25s ease, transform .25s ease;
+    }
+    .navbar--solid{ background: var(--glass-solid); }
+    .navbar--hidden{ transform: translateY(-100%); }
+
+    .nav-row{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      height:72px; width:min(1100px,92vw); margin-inline:auto;
+    }
+
+    /* Left: LOGO (PNG) — always visible */
+    .nav-left{ display:flex; align-items:center; gap:10px; min-width:140px; }
+    .nav-logo{ height:36px; width:auto; display:block; }
+
+    /* Center: TITLE (SVG) — forced black via CSS color */
+    .nav-title{ display:flex; align-items:center; justify-content:center; flex:1; text-align:center; }
+    .nav-title .title-svg{ display:inline-flex; color: var(--ink); line-height:0; }
+    .nav-title img,
+    .nav-title svg{ height:28px; width:auto; display:block; }
+
+    /* Right: links */
+    .nav-links{ display:flex; align-items:center; gap:18px; font-weight:600; color:var(--ink); }
+    .nav-links a{ color:var(--ink); text-decoration:none; }
+    .pill{ border:1.5px solid var(--ink); color:var(--ink); padding:.55rem 1rem; border-radius:999px; font-weight:700; }
+    .pill--solid{ background:var(--ink); color:#fff; }
+
+    /* Mobile */
+    .menu-btn{ display:none; border:1px solid var(--ink); background:#fff; color:var(--ink); padding:.45rem .8rem; border-radius:999px; font-weight:700; }
+    .mobile{ background:#ffffffee; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom:1px solid var(--border); display:grid; gap:8px; padding:12px 4vw; }
+    .mobile a{ padding:8px 6px; color:var(--ink); font-weight:600; text-decoration:none; }
+    @media (max-width: 900px){
+      .nav-links{ display:none; }
+      .menu-btn{ display:inline-flex; }
+      .nav-left{ min-width:auto; }
+      .nav-title{ justify-content:flex-start; }
+    }
+
+    /* HERO + helpers */
+    #hero{ position:relative; min-height:86vh; }
+    .hero__bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .hero__shade{ position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.48)); }
+    .hero__inner{ position:relative; z-index:2; padding:24vh 0 14vh; color:#fff; }
+    .lead{ opacity:.9; max-width:60ch; }
+    .cta-row{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+
+    /* Cards/sections */
+    .section{ padding:72px 0; }
+    .grid{ display:grid; gap:16px; grid-template-columns:repeat(3,1fr); }
+    .card{ background:#fff; border:1px solid #eee; border-radius:14px; padding:16px; }
+    @media (max-width: 900px){ .grid{ grid-template-columns:1fr; } }
+
+    .aspect-video{ position:relative; padding-top:56.25%; border-radius:12px; overflow:hidden; background:#000; }
+    .aspect-video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+    /* Subtle reveal (optional) */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal--visible { opacity: 1; transform: none; }
+
+    /* Footer */
+    footer{ background:#111827; color:#cbd5e1; padding:48px 0 28px; margin-top:48px; }
+    .fgrid{ display:grid; gap:18px; grid-template-columns:repeat(3,1fr); }
+    @media (max-width:900px){ .fgrid{ grid-template-columns:1fr; } }
+    .fbrand{ color:#fff; font-weight:800; }
+  </style>
 </head>
 <body>
+
+  <!-- NAVBAR -->
   <header class="navbar" id="siteNav">
-    <div class="container">
-      <div class="nav-row">
-        <a href="index.html" class="nav-title" aria-label="The Experience">
-          <div class="title-light" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 259.1397 42.0000" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-  <path d="M0.5587583148558759 9.933481152993348H18.314855875831487V15.303769401330378H12.23059866962306V31.414634146341466H6.643015521064302V15.303769401330378H0.5587583148558759Z M26.509977827051 17.973392461197342H34.6430155210643V9.933481152993348H40.23059866962306V31.414634146341466H34.6430155210643V23.25055432372506H26.509977827051V31.414634146341466H20.92239467849224V9.933481152993348H26.509977827051Z M44.328159645232816 9.933481152993348H59.25942350332595V15.14855875831486H49.91574279379158V18.066518847006655H58.01773835920178V23.281596452328163H49.91574279379158V26.19955654101996H59.25942350332595V31.414634146341466H44.328159645232816Z M70.55875831485588 9.933481152993348H85.49002217294901V15.14855875831486H76.14634146341464V18.066518847006655H84.24833702882484V23.281596452328163H76.14634146341464V26.19955654101996H85.49002217294901V31.414634146341466H70.55875831485588Z M108.36807095343681 9.933481152993348 102.00443458980045 20.549889135254993 108.67849223946786 31.414634146341466H102.470066518847L97.9689578713969 23.529933481152995L93.46784922394679 31.414634146341466H87.25942350332595L93.93348115299335 20.549889135254993L87.56984478935699 9.933481152993348H93.77827050997783L97.9689578713969 17.47671840354767L102.15964523281596 9.933481152993348Z M111.00665188470067 9.933481152993348H119.57427937915745Q124.10643015521066 9.933481152993348 126.46563192904658 11.951219512195124Q128.8248337028825 13.9689578713969 128.8248337028825 17.911308203991133V17.942350332594238Q128.8248337028825 21.853658536585368 126.48115299334813 23.871396895787143Q124.13747228381376 25.889135254988915 119.57427937915745 25.889135254988915H116.59423503325944V31.414634146341466H111.00665188470067ZM123.23725055432374 17.942350332594238V17.911308203991133Q123.23725055432374 16.483370288248338 122.33702882483371 15.847006651884703Q121.4368070953437 15.210643015521068 119.57427937915745 15.210643015521068H116.59423503325944V20.611973392461202H119.57427937915745Q121.4678492239468 20.611973392461202 122.35254988913528 20.00665188470067Q123.23725055432374 19.401330376940138 123.23725055432374 17.942350332594238Z M131.52549889135258 9.933481152993348H146.4567627494457V15.14855875831486H137.11308203991132V18.066518847006655H145.21507760532154V23.281596452328163H137.11308203991132V26.19955654101996H146.4567627494457V31.414634146341466H131.52549889135258Z M168.37250554323728 31.414634146341466H162.13303769401332L158.159645232816 24.74057649667406H155.58314855875832V31.414634146341466H149.9955654101996V9.933481152993348H159.05986696230602Q163.25055432372508 9.933481152993348 165.53215077605324 11.889135254988915Q167.8137472283814 13.844789356984482 167.8137472283814 17.383592017738362V17.414634146341466Q167.8137472283814 22.350332594235034 163.52993348115302 24.026607538802665ZM159.05986696230602 14.962305986696233H155.58314855875832V19.929046563192905H159.05986696230602Q160.6119733924612 19.929046563192905 161.41906873614192 19.38580931263858Q162.22616407982264 18.84257206208426 162.22616407982264 17.414634146341466V17.383592017738362Q162.22616407982264 14.962305986696233 159.05986696230602 14.962305986696233Z M176.62971175166297 31.414634146341466H171.04212860310423V9.933481152993348H176.62971175166297Z M180.72727272727275 9.933481152993348H195.65853658536585V15.14855875831486H186.31485587583148V18.066518847006655H194.4168514412417V23.281596452328163H186.31485587583148V26.19955654101996H195.65853658536585V31.414634146341466H180.72727272727275Z M213.07317073170734 21.760532150776058V9.933481152993348H218.50554323725055V31.414634146341466H213.6319290465632L204.62971175166297 19.618625277161865V31.414634146341466H199.19733924611975V9.933481152993348H204.07095343680712Z M240.26607538802662 12.292682926829269 237.19290465631929 16.483370288248338Q235.20620842572063 14.776053215077606 232.50554323725055 14.776053215077606H232.47450110864747Q229.9290465631929 14.776053215077606 228.4390243902439 16.452328159645234Q226.94900221729492 18.128603104212864 226.94900221729492 20.643015521064306V20.674057649667407Q227.01108647450113 23.25055432372506 228.48558758314857 24.911308203991133Q229.96008869179602 26.572062084257208 232.47450110864747 26.572062084257208H232.50554323725055Q235.17516629711753 26.572062084257208 237.19290465631929 24.864745011086477L240.26607538802662 29.055432372505546Q237.3481152993348 31.787139689578716 232.50554323725055 31.787139689578716H232.47450110864747Q227.32150776053217 31.787139689578716 224.34146341463418 28.69844789356985Q221.36141906873615 25.60975609756098 221.36141906873615 20.674057649667407V20.643015521064306Q221.36141906873615 15.738359201773838 224.34146341463418 12.64966740576497Q227.32150776053217 9.560975609756099 232.47450110864747 9.560975609756099H232.50554323725055Q237.3481152993348 9.560975609756099 240.26607538802662 12.292682926829269Z M242.71840354767187 9.933481152993348H257.649667405765V15.14855875831486H248.3059866962306V18.066518847006655H256.4079822616408V23.281596452328163H248.3059866962306V26.19955654101996H257.649667405765V31.414634146341466H242.71840354767187Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-</svg>
-          </div>
-          <div class="title-color">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 259.1397 42.0000" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
-  <path d="M0.5587583148558759 9.933481152993348H18.314855875831487V15.303769401330378H12.23059866962306V31.414634146341466H6.643015521064302V15.303769401330378H0.5587583148558759Z M26.509977827051 17.973392461197342H34.6430155210643V9.933481152993348H40.23059866962306V31.414634146341466H34.6430155210643V23.25055432372506H26.509977827051V31.414634146341466H20.92239467849224V9.933481152993348H26.509977827051Z M44.328159645232816 9.933481152993348H59.25942350332595V15.14855875831486H49.91574279379158V18.066518847006655H58.01773835920178V23.281596452328163H49.91574279379158V26.19955654101996H59.25942350332595V31.414634146341466H44.328159645232816Z M70.55875831485588 9.933481152993348H85.49002217294901V15.14855875831486H76.14634146341464V18.066518847006655H84.24833702882484V23.281596452328163H76.14634146341464V26.19955654101996H85.49002217294901V31.414634146341466H70.55875831485588Z M108.36807095343681 9.933481152993348 102.00443458980045 20.549889135254993 108.67849223946786 31.414634146341466H102.470066518847L97.9689578713969 23.529933481152995L93.46784922394679 31.414634146341466H87.25942350332595L93.93348115299335 20.549889135254993L87.56984478935699 9.933481152993348H93.77827050997783L97.9689578713969 17.47671840354767L102.15964523281596 9.933481152993348Z M111.00665188470067 9.933481152993348H119.57427937915745Q124.10643015521066 9.933481152993348 126.46563192904658 11.951219512195124Q128.8248337028825 13.9689578713969 128.8248337028825 17.911308203991133V17.942350332594238Q128.8248337028825 21.853658536585368 126.48115299334813 23.871396895787143Q124.13747228381376 25.889135254988915 119.57427937915745 25.889135254988915H116.59423503325944V31.414634146341466H111.00665188470067ZM123.23725055432374 17.942350332594238V17.911308203991133Q123.23725055432374 16.483370288248338 122.33702882483371 15.847006651884703Q121.4368070953437 15.210643015521068 119.57427937915745 15.210643015521068H116.59423503325944V20.611973392461202H119.57427937915745Q121.4678492239468 20.611973392461202 122.35254988913528 20.00665188470067Q123.23725055432374 19.401330376940138 123.23725055432374 17.942350332594238Z M131.52549889135258 9.933481152993348H146.4567627494457V15.14855875831486H137.11308203991132V18.066518847006655H145.21507760532154V23.281596452328163H137.11308203991132V26.19955654101996H146.4567627494457V31.414634146341466H131.52549889135258Z M168.37250554323728 31.414634146341466H162.13303769401332L158.159645232816 24.74057649667406H155.58314855875832V31.414634146341466H149.9955654101996V9.933481152993348H159.05986696230602Q163.25055432372508 9.933481152993348 165.53215077605324 11.889135254988915Q167.8137472283814 13.844789356984482 167.8137472283814 17.383592017738362V17.414634146341466Q167.8137472283814 22.350332594235034 163.52993348115302 24.026607538802665ZM159.05986696230602 14.962305986696233H155.58314855875832V19.929046563192905H159.05986696230602Q160.6119733924612 19.929046563192905 161.41906873614192 19.38580931263858Q162.22616407982264 18.84257206208426 162.22616407982264 17.414634146341466V17.383592017738362Q162.22616407982264 14.962305986696233 159.05986696230602 14.962305986696233Z M176.62971175166297 31.414634146341466H171.04212860310423V9.933481152993348H176.62971175166297Z M180.72727272727275 9.933481152993348H195.65853658536585V15.14855875831486H186.31485587583148V18.066518847006655H194.4168514412417V23.281596452328163H186.31485587583148V26.19955654101996H195.65853658536585V31.414634146341466H180.72727272727275Z M213.07317073170734 21.760532150776058V9.933481152993348H218.50554323725055V31.414634146341466H213.6319290465632L204.62971175166297 19.618625277161865V31.414634146341466H199.19733924611975V9.933481152993348H204.07095343680712Z M240.26607538802662 12.292682926829269 237.19290465631929 16.483370288248338Q235.20620842572063 14.776053215077606 232.50554323725055 14.776053215077606H232.47450110864747Q229.9290465631929 14.776053215077606 228.4390243902439 16.452328159645234Q226.94900221729492 18.128603104212864 226.94900221729492 20.643015521064306V20.674057649667407Q227.01108647450113 23.25055432372506 228.48558758314857 24.911308203991133Q229.96008869179602 26.572062084257208 232.47450110864747 26.572062084257208H232.50554323725055Q235.17516629711753 26.572062084257208 237.19290465631929 24.864745011086477L240.26607538802662 29.055432372505546Q237.3481152993348 31.787139689578716 232.50554323725055 31.787139689578716H232.47450110864747Q227.32150776053217 31.787139689578716 224.34146341463418 28.69844789356985Q221.36141906873615 25.60975609756098 221.36141906873615 20.674057649667407V20.643015521064306Q221.36141906873615 15.738359201773838 224.34146341463418 12.64966740576497Q227.32150776053217 9.560975609756099 232.47450110864747 9.560975609756099H232.50554323725055Q237.3481152993348 9.560975609756099 240.26607538802662 12.292682926829269Z M242.71840354767187 9.933481152993348H257.649667405765V15.14855875831486H248.3059866962306V18.066518847006655H256.4079822616408V23.281596452328163H248.3059866962306V26.19955654101996H257.649667405765V31.414634146341466H242.71840354767187Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
-</svg>
-          </div>
-        </a>
-        <nav class="links">
-          <a href="about.html">About</a>
-          <a href="media.html">Groups</a>
-          <a href="visit.html">Visit</a>
-          <a href="#give">Give</a>
-          <a href="visit.html#plan" class="pill">Plan a Visit</a>
-        </nav>
-      </div>
+    <div class="nav-row">
+      <!-- Left: your PNG logo -->
+      <a href="index.html" class="nav-left" aria-label="The Experience">
+        <img src="assets/churchlogo.png" alt="The Experience logo" class="nav-logo">
+      </a>
+
+      <!-- Center: Title as SVG (black) -->
+      <a href="index.html" class="nav-title" aria-label="The Experience">
+        <span class="title-svg">
+          <!-- Using your uploaded SVG as an <img> keeps it simple.
+               If you need to control color via CSS currentColor,
+               you can inline the SVG markup and set its paths to fill='currentColor'. -->
+          <img src="assets/the_experience_organetto_from_ttf.svg" alt="The Experience wordmark">
+        </span>
+      </a>
+
+      <!-- Right: links -->
+      <nav class="nav-links" aria-label="Primary">
+        <a href="about.html">About</a>
+        <a href="media.html">Groups</a>
+        <a href="visit.html">Visit</a>
+        <a href="#give" class="pill">Give</a>
+        <a href="visit.html#plan" class="pill pill--solid">Plan a Visit</a>
+      </nav>
+
+      <!-- Mobile -->
+      <button id="menuBtn" class="menu-btn" aria-controls="mobileMenu" aria-expanded="false">Menu</button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile" id="mobileMenu" hidden>
+      <a href="about.html">About</a>
+      <a href="media.html">Groups</a>
+      <a href="visit.html">Visit</a>
+      <a href="#give">Give</a>
+      <a href="visit.html#plan">Plan a Visit</a>
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section id="hero" class="hero">
-      <img class="hero__bg" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=2400&auto=format&fit=crop" alt="">
-      <div class="hero__overlay"></div>
-      <div class="container" style="position:relative; z-index:2; padding:24vh 0 14vh; color:#fff;">
-        <h1 class="reveal" style="font-size:clamp(2.6rem,6vw,4.8rem);line-height:1.02;margin:0 0 .6rem;font-weight:800">We Are The Experience</h1>
-        <p class="reveal" style="max-width:60ch;opacity:.9">Join us this Sunday — there’s a place for you and your family.</p>
-        <div class="reveal" style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
-          <a href="visit.html" class="pill pill--solid">Visit</a>
-          <a href="media.html" class="pill">Get Involved</a>
+  <!-- HERO -->
+  <section id="hero">
+    <img class="hero__bg" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=2400&auto=format&fit=crop" alt="">
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <h1 class="reveal" style="font-size:clamp(2.6rem,6vw,4.8rem);line-height:1.02;margin:0 0 .6rem;font-weight:800">We Are The Experience</h1>
+      <p class="lead reveal">Join us this Sunday — there’s a place for you and your family.</p>
+      <div class="cta-row reveal">
+        <a href="visit.html" class="pill pill--solid" style="background:#fff;color:#111827;border-color:#fff">Visit</a>
+        <a href="media.html" class="pill" style="color:#fff;border-color:#fff">Get Involved</a>
+      </div>
+      <div class="card reveal" style="background:rgba(17,24,39,.78); color:#fff; border-color:rgba(255,255,255,.18); margin-top:22px; max-width:520px;">
+        <div style="letter-spacing:.12em; text-transform:uppercase; font-size:.8rem; opacity:.9">Watch the Latest</div>
+        <div class="aspect-video" style="margin-top:8px;">
+          <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&rel=0"
+                  title="Livestream"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FEATURE STRIP -->
-    <section class="section">
-      <div class="container">
-        <div class="grid">
-          <article class="card reveal">
-            <h3 style="margin:.4rem 0 0">Watch the latest livestream</h3>
-            <div class="aspect-video" style="border-radius:12px;overflow:hidden;background:#000;margin-top:8px">
-              <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID&rel=0" title="Livestream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-            </div>
-          </article>
-          <article class="card reveal">
-            <h3 style="margin:.4rem 0 0">Plan a Visit</h3>
-            <p style="opacity:.8">Let us know you’re coming — we’ll greet you and help with kids check‑in.</p>
-            <a href="visit.html#plan" class="pill pill--solid" style="margin-top:8px;display:inline-block">Start</a>
-          </article>
-          <article class="card reveal">
-            <h3 style="margin:.4rem 0 0">Join a Small Group</h3>
-            <p style="opacity:.8">Life is better in community. Find a group near you.</p>
-            <a href="media.html" class="pill" style="margin-top:8px;display:inline-block">Explore</a>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer id="give" class="section">
+  <!-- QUICK CARDS -->
+  <section class="section">
     <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <div class="grid">
+        <article class="card reveal">
+          <h3 style="margin:.4rem 0 0">Plan a Visit</h3>
+          <p style="opacity:.8">Let us know you’re coming — we’ll greet you and help with kids check‑in.</p>
+          <a href="visit.html#plan" class="pill pill--solid" style="margin-top:8px; display:inline-block">Start</a>
+        </article>
+        <article class="card reveal">
+          <h3 style="margin:.4rem 0 0">Join a Small Group</h3>
+          <p style="opacity:.8">Life is better in community. Find a group near you.</p>
+          <a href="media.html" class="pill" style="margin-top:8px; display:inline-block">Explore</a>
+        </article>
+        <article class="card reveal">
+          <h3 style="margin:.4rem 0 0">Give</h3>
+          <p style="opacity:.8">Text any amount to <strong>84321</strong> or give online.</p>
+          <a href="#give" class="pill" style="margin-top:8px; display:inline-block">Ways to Give</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="give">
+    <div class="container">
+      <div class="fgrid">
         <div>
-          <strong style="color:#fff">The Experience</strong><br/>
-          5014 W. Marlette Ave, Glendale, AZ<br/>
-          (623) 562-0242
+          <div class="fbrand">The Experience</div>
+          <div class="muted">5014 W. Marlette Ave, Glendale, AZ</div>
+          <div class="muted">(623) 562-0242</div>
         </div>
         <div>
           <strong style="color:#fff">Gatherings</strong><br/>
@@ -90,13 +196,57 @@
           Text any amount to <strong>84321</strong> or give online.
         </div>
       </div>
-      <div style="border-top:1px solid #233041;margin-top:18px;padding-top:14px;font-size:.9rem;opacity:.8">
+      <div style="border-top:1px solid #233041; margin-top:18px; padding-top:14px; font-size:.9rem; opacity:.8">
         © <span id="year"></span> The Experience Church
       </div>
     </div>
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
   </footer>
 
-  <script src="app.js"></script>
+  <!-- Tiny JS: solid-after-hero, hide-on-scroll, mobile menu, reveal -->
+  <script>
+    (function(){
+      const nav = document.getElementById('siteNav');
+      let lastY = window.scrollY;
+      const hero = document.getElementById('hero');
+      const heroH = hero ? hero.offsetHeight : 240;
+
+      function onScroll(){
+        const y = window.scrollY;
+        // solid background after hero
+        if (y > heroH - 60) nav.classList.add('navbar--solid');
+        else nav.classList.remove('navbar--solid');
+
+        // hide on scroll down, show on scroll up
+        if (y > lastY && y > 140) nav.classList.add('navbar--hidden');
+        else nav.classList.remove('navbar--hidden');
+        lastY = y;
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive:true });
+
+      // mobile menu toggle
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      if (btn && menu) {
+        btn.addEventListener('click', ()=>{
+          const open = menu.hasAttribute('hidden');
+          if (open) menu.removeAttribute('hidden'); else menu.setAttribute('hidden','');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      // reveal on scroll
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('reveal--visible'); io.unobserve(e.target); }
+        });
+      }, {threshold:.15});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+      // year
+      const yel = document.getElementById('year');
+      if (yel) yel.textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
